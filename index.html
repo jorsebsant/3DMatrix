@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+</head>
+<body>
+
+
+
+</body>
+</html>
+<script>
+	
+
+	var Matriz= (function(){
+
+		return {
+			initMatrix: function(tamano){
+				var matrix3D = [];
+				for(var x = 0; x < tamano; x++){
+				    matrix3D[x] = [];    
+				    for(var y = 0; y < tamano; y++){ 
+				        matrix3D[x][y] = [];
+
+				        //Profundidad Z
+				        matrix3D[x][y][0]=0;    
+				    }    
+				}
+				console.log(matrix3D);
+				return matrix3D;
+			},
+			updateMatrix: function (operation,matrix){
+
+				var operation=operation.split(" ");
+				var x=operation[1];
+				var y=operation[2];
+				var z=operation[3];
+				var w=operation[4];
+				matrix[x][y][z]=w;
+				return matrix;
+				
+			},
+
+			queryMatrix: function(operation){
+					alert('funciona');
+
+			}
+
+		}
+
+	})();
+
+
+	var Test=(function(){
+
+		return {
+			initCases: function(testCases,matrix){
+				var result="";
+				while(testCases>0){
+					for (var i = 0; i <= m; i++) {
+						var operacion=prompt("Ingrese la operacion "+(i+1));
+						if(operacion.indexOf('UPDATE')>-1){
+							matrix=Matriz.updateMatrix(operacion);
+							console.log(matrix);
+						}else if(operacion.indexOf('QUERY')>-1){
+							result=Matriz.queryMatrix(operacion);
+						}else{
+							alert('Operación inválida');
+							i--;
+						}
+					}
+					testCases--;
+				}
+			}
+		}
+
+	})();
+	//Cantidad de casos de prueba
+	var testCases = prompt('Ingrese la cantidad de casos de prueba');
+
+	var init=prompt('Ingrese el tamaño de la matriz (N) y la cantidad de operaciones por caso de prueba (M)'+
+		'separados por un espacio').split(" ");
+
+	//Dimensiones Matriz
+	var n=init[0];
+
+	//Operaciones
+	var m=init[1];
+
+	var matrix=Matriz.initMatrix(n);
+
+	Test.initCases(testCases,matrix);
+
+
+	
+
+
+
+
+	
+
+
+</script>
