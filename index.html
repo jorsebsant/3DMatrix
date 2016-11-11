@@ -18,14 +18,14 @@
 		return {
 			initMatrix: function(tamano){
 				var matrix3D = [];
-				for(var x = 0; x < tamano; x++){
-				    matrix3D[x] = [];    
-				    for(var y = 0; y < tamano; y++){ 
-				        matrix3D[x][y] = [];
+				for(var n = 1; n <= tamano; n++){
+				    matrix3D[n] = [];    
+				   
+				        matrix3D[n][n] = [];
 
 				        //Profundidad Z
-				        matrix3D[x][y][0]=0;    
-				    }    
+				        matrix3D[n][n][n]=0;    
+				      
 				}
 				console.log(matrix3D);
 				return matrix3D;
@@ -37,13 +37,30 @@
 				var y=operation[2];
 				var z=operation[3];
 				var w=operation[4];
+				
 				matrix[x][y][z]=w;
+
 				return matrix;
 				
 			},
 
-			queryMatrix: function(operation){
-					alert('funciona');
+			queryMatrix: function(operation,matrix){
+				var operation=operation.split(" ");
+				var x1=operation[1];
+				var y1=operation[2];
+				var z1=operation[3];
+
+				var x2=operation[4];
+				var y2=operation[5];
+				var z2=operation[6];
+
+				var suma=0;
+
+				for(var n=x1; n<=x2;n++){
+
+					suma+=parseInt(matrix[n][n][n]);
+				}
+				return suma;			
 
 			}
 
@@ -55,16 +72,28 @@
 	var Test=(function(){
 
 		return {
-			initCases: function(testCases,matrix){
+			initCases: function(testCases){
 				var result="";
 				while(testCases>0){
-					for (var i = 0; i <= m; i++) {
+					var init=prompt('Ingrese el tamaño de la matriz (N) y la cantidad de operaciones por caso de prueba (M)'+
+					'separados por un espacio').split(" ");
+
+					//Dimensiones Matriz
+					var n=init[0];
+
+					//Operaciones
+					var m=init[1];
+
+					var matrix=Matriz.initMatrix(n);
+
+					for (var i = 0; i < m; i++) {
 						var operacion=prompt("Ingrese la operacion "+(i+1));
 						if(operacion.indexOf('UPDATE')>-1){
-							matrix=Matriz.updateMatrix(operacion);
-							console.log(matrix);
+							matrix=Matriz.updateMatrix(operacion,matrix);
+							
 						}else if(operacion.indexOf('QUERY')>-1){
-							result=Matriz.queryMatrix(operacion);
+							result=Matriz.queryMatrix(operacion,matrix);
+							console.log(result);
 						}else{
 							alert('Operación inválida');
 							i--;
@@ -77,20 +106,11 @@
 
 	})();
 	//Cantidad de casos de prueba
-	var testCases = prompt('Ingrese la cantidad de casos de prueba');
+	var testCases = prompt('Ingrese la cantidad de casos de prueba');	
 
-	var init=prompt('Ingrese el tamaño de la matriz (N) y la cantidad de operaciones por caso de prueba (M)'+
-		'separados por un espacio').split(" ");
+	
 
-	//Dimensiones Matriz
-	var n=init[0];
-
-	//Operaciones
-	var m=init[1];
-
-	var matrix=Matriz.initMatrix(n);
-
-	Test.initCases(testCases,matrix);
+	Test.initCases(testCases);
 
 
 	
