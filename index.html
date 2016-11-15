@@ -106,7 +106,8 @@
 						}else if(operacion.indexOf('QUERY')>-1){
 							result=Matriz.queryMatrix(operacion,matrix);
 							alert('El resultado de la operación es '+result);
-							document.write=result+'\n';
+							console.log(result);
+							document.write(result+'\n');
 						}else{
 							alert('Operación inválida');
 							i--;
@@ -128,6 +129,8 @@
 
 	 if(1<=testCases&&testCases<=50){
 	 	Test.initCases(testCases);
+	 	x=1;
+	 }else if(testcases==''){
 	 	x=1;
 	 }else{
 	 	alert('Ingrése un número valido de casos de prueba entre 1 y 50');
