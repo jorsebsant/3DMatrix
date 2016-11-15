@@ -12,10 +12,15 @@
 </html>
 <script>
 	
+	//MODULE PATTERN JAVASCRIPT
 
+	//MÓDULO DE MATRIZ
+	//Se encarga de todas las operaciones relacionadas con la matriz
 	var Matriz= (function(){
 
 		return {
+
+			//Inicializar matriz de a cuerdo al tamaño elegido por el usuario
 			initMatrix: function(tamano){
 				var matrix3D = [];
 				for(var n = 1; n <= tamano; n++){
@@ -30,6 +35,8 @@
 				console.log(matrix3D);
 				return matrix3D;
 			},
+
+			//Actualiza la Matriz
 			updateMatrix: function (operation,matrix){
 
 				var operation=operation.split(" ");
@@ -43,7 +50,7 @@
 				return matrix;
 				
 			},
-
+			//Consulta la matriz
 			queryMatrix: function(operation,matrix){
 				var operation=operation.split(" ");
 				var x1=operation[1];
@@ -72,6 +79,8 @@
 	var Test=(function(){
 
 		return {
+
+			//inicia los casos de prueba
 			initCases: function(testCases){
 				var result="";
 				while(testCases>0){
@@ -80,7 +89,10 @@
 
 					//Dimensiones Matriz
 					var n=init[0];
-
+					if(1>=n||n>=100){
+						alert('ingrese dimensiones válidas entre 1 y 100');
+						continue;
+					}	
 					//Operaciones
 					var m=init[1];
 
@@ -93,7 +105,8 @@
 							
 						}else if(operacion.indexOf('QUERY')>-1){
 							result=Matriz.queryMatrix(operacion,matrix);
-							console.log(result);
+							alert('El resultado de la operación es '+result);
+							document.write=result+'\n';
 						}else{
 							alert('Operación inválida');
 							i--;
@@ -105,12 +118,26 @@
 		}
 
 	})();
+
+
+	//INIT DEL SISTEMA
+	var x=0;
 	//Cantidad de casos de prueba
-	var testCases = prompt('Ingrese la cantidad de casos de prueba');	
+	while(x==0){
+	 var testCases = prompt('Ingrese la cantidad de casos de prueba');
+
+	 if(1<=testCases&&testCases<=50){
+	 	Test.initCases(testCases);
+	 	x=1;
+	 }else{
+	 	alert('Ingrése un número valido de casos de prueba entre 1 y 50');
+	 }	
+	}
+	
 
 	
 
-	Test.initCases(testCases);
+	
 
 
 	
